@@ -6,3 +6,6 @@ configure.ac contains the AC_SUBST macro, so the
 corresponding variable is defined in the Makefile:
 
   grep VAR_TQ84 Makefile
+  
+See also:
+  http://renenyffenegger.ch/notes/development/GNU/toolchain/Build-System/Autoconf/macros/AC_SUBST
