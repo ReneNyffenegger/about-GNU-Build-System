@@ -1,0 +1,73 @@
+//
+//  http://www.adp-gmbh.ch/misc/tools/configure/files_used.html
+//
+
+digraph map {
+
+  node [shape=hexagon     fontsize=12 fontname=verdana]; configure_ac Makefile_am acconfig_h code acinclude_m4 autogen_sh  man_created;   
+  node [shape=box         fontsize=12 fontname=verdana]; aclocal_m4 configure config_h_in Makefile_in Makefile
+                                                         config_status config_log configure_scan  created; 
+
+  node [shape=ellipse fontsize=12 fontname=verdana]; aclocal autoheader autoconf autoreconf automake autoscan  gnu_tools;      
+
+  autoen_sh      [label="autogen.sh"                            ];
+  configure_in   [label="configure.in"                          ];
+  configure_ac   [label="configure.ac"                          ];
+  Makefile_am    [label="Makefile.am"                           ];
+  configure      [label="./configure"                           ];
+  aclocal        [label="aclocal"                               ];
+  autoheader     [label="autoheader"                            ];
+  autoconf       [label="autoconf"                              ];
+  autoreconf     [label="autoreconf\ncreated from autoreconf.in"];
+  autoscan       [label="autoscan"                              ];
+  config_h_in    [label="config.h.in"                           ];
+  aclocal_m4     [label="aclocal.m4"                            ];
+  config_h       [label="config.h"                              ];
+  Makefile_in    [label="Makefile.in"                           ];
+  gnu_tools      [label="GNU Tools"                             ];
+  created        [label="created"                               ];
+  man_created    [label="manually created"                      ];
+  acconfig_h     [label="acconfig.h"                            ];
+  acinclude_m4   [label="acinclude.m4"                          ];
+  config_status  [label="config.status"                         ];
+  config_log     [label="config.log"                            ];
+  configure_scan [label="configure.scan"                        ];
+  code           [label="code"                                  ];
+
+
+  // Apparently, autoreconf needs either configure.in or configure.ac as input
+  configure_in   -> autoreconf [style=dashed];
+  configure_ac   -> autoreconf [style=dashed];
+
+  code           -> autoscan;
+
+  configure_ac   -> autoconf;
+  autoconf       -> configure;
+
+  autoscan       -> configure_scan;
+  configure_scan -> configure_ac    [label="Manually editing" fontname=verdana fontsize=12];
+
+  configure_ac   -> aclocal         [label=reads  fontname=verdana fontsize=12];
+  acinclude_m4   -> aclocal;
+  aclocal        -> aclocal_m4;
+  aclocal_m4     -> autoconf        [label=reads  fontname=verdana fontsize=12];
+  aclocal_m4     -> autoheader      [label=reads  fontname=verdana fontsize=12]; /*see http://www.lrde.epita.fr/~adl/dl/autotools.pdf*/
+  aclocal_m4     -> automake        [label=reads  fontname=verdana fontsize=12]; /*see http://www.lrde.epita.fr/~adl/dl/autotools.pdf*/
+
+  acconfig_h     -> autoheader;
+  configure_ac   -> autoheader      [label=reads  fontname=verdana fontsize=12];
+  autoheader     -> config_h_in;
+
+  Makefile_am    -> automake;
+  automake       -> Makefile_in;
+
+  configure_ac   -> automake        [label=reads  fontname=verdana fontsize=12]; /*see http://www.lrde.epita.fr/~adl/dl/autotools.pdf*/
+  config_h_in    -> configure       [label=reads  fontname=verdana fontsize=12];
+  Makefile_in    -> configure       [label=reads  fontname=verdana fontsize=12];
+  configure      -> config_h        [label=writes fontname=verdana fontsize=12];
+  configure      -> Makefile        [label=writes fontname=verdana fontsize=12];
+  configure      -> config_status   [label=writes fontname=verdana fontsize=12 style=dotted];
+  configure      -> config_log      [label=writes fontname=verdana fontsize=12];
+
+  Makefile       -> make;
+}
