@@ -1,0 +1,13 @@
+AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
+
+AC_CONFIG_SRCDIR([main.c])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([Makefile])
+
+AC_PROG_CC
+
+AC_ARG_VAR(VAR_TQ84, [The description for variable VAR_TQ84])
+
+AM_INIT_AUTOMAKE([foreign])
+
+AC_OUTPUT
