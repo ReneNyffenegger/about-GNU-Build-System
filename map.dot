@@ -30,6 +30,7 @@ digraph map {
   acconfig_h     [label="acconfig.h"                            ];
   acinclude_m4   [label="acinclude.m4"                          ];
   config_status  [label="config.status"                         ];
+  config_cache   [label="config.cache\n./configure -C"          ]; // created with ./configure -C
   config_log     [label="config.log"                            ];
   configure_scan [label="configure.scan"                        ];
   code           [label="code"                                  ];
@@ -67,6 +68,7 @@ digraph map {
   configure      -> config_h        [label=writes fontname=verdana fontsize=12];
   configure      -> Makefile        [label=writes fontname=verdana fontsize=12];
   configure      -> config_status   [label=writes fontname=verdana fontsize=12 style=dotted];
+  configure      -> config_cache    [label=writes fontname=verdana fontsize=12 style=dotted];
   configure      -> config_log      [label=writes fontname=verdana fontsize=12];
 
   Makefile       -> make;
