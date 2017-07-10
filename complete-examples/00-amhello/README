@@ -1,0 +1,14 @@
+Example found at
+  https://www.gnu.org/software/automake/manual/html_node/Creating-amhello.html#Creating-amhello
+
+Run
+  autoreconf --install
+
+After running autoreconf --install, the build system is complete.
+
+Run
+  ./configure
+  make
+
+The executable is now built:
+  ./src/hello
